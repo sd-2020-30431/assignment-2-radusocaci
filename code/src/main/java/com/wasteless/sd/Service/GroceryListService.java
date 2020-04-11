@@ -15,8 +15,8 @@ public class GroceryListService {
         this.groceryListRepository = groceryListRepository;
     }
 
-    public void save(GroceryList groceryList) {
-        groceryListRepository.save(groceryList);
+    public GroceryList save(GroceryList groceryList) {
+        return groceryListRepository.save(groceryList);
     }
 
     public List<GroceryList> findAllByUsername(String userId) {
@@ -29,5 +29,9 @@ public class GroceryListService {
 
     public void deleteGroceryList(Integer id) {
         groceryListRepository.deleteById(id);
+    }
+
+    public List<GroceryList> findAll() {
+        return (List<GroceryList>) groceryListRepository.findAll();
     }
 }

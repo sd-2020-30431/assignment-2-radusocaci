@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -36,8 +37,8 @@ public class GroceryItemService {
         return groceryItemRepository.findByGroceryListId(listId);
     }
 
-    public void save(GroceryListItem groceryListItem, Integer listId, String name) {
-        groceryListRepository.findById(listId).map(list -> {
+    public GroceryListItem save(GroceryListItem groceryListItem, Integer listId, String name) {
+        Optional<GroceryListItem> groceryListItem1 = groceryListRepository.findById(listId).map(list -> {
             groceryListItem.setGroceryList(list);
             List<GroceryListItem> listItems = findByListId(listId);
             List<String> listItemNames = listItems
@@ -55,6 +56,7 @@ public class GroceryItemService {
         });
 
         checkWaste(name);
+        return groceryListItem1.get();
     }
 
     public void deleteGroceryItem(Integer id, String name) {

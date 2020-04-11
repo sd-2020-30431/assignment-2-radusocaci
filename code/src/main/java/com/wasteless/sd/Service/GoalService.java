@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GoalService {
-    private GoalRepository goalRepository;
+    private final GoalRepository goalRepository;
 
     public GoalService(GoalRepository goalRepository) {
         this.goalRepository = goalRepository;

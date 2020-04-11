@@ -27,10 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .anyRequest().authenticated()
-                .and().httpBasic()
-                .and().formLogin().defaultSuccessUrl("/grocery-lists", true)
-                .loginPage("/auth/login").permitAll()
-                .and().logout().permitAll();
+                .anyRequest().permitAll();
+//                .and().httpBasic()
+//                .and().formLogin().defaultSuccessUrl("/grocery-lists", true)
+//                .loginPage("/auth/login").permitAll()
+//                .and().logout().permitAll();
     }
 }

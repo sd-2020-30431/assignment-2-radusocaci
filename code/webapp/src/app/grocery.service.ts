@@ -20,11 +20,6 @@ export class GroceryService {
       .pipe(catchError(this.handleError<GroceryList[]>("getGroceryLists", [])));
   }
 
-  getGroceryList(id: number): Observable<GroceryList> {
-    return this.http.get<GroceryList>(`${this.baseUrl}/?id=${id}`)
-      .pipe(catchError(this.handleError<GroceryList>(`getGroceryList id=${id}`)));
-  }
-
   createGroceryList(groceryList: GroceryList): Observable<GroceryList> {
     return this.http.post<GroceryList>(this.baseUrl, groceryList, this.httpOptions)
       .pipe(catchError(this.handleError<GroceryList>("createGroceryList")));

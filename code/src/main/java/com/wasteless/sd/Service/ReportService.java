@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class ReportService {
-    private GroceryListRepository groceryListRepository;
-    private GroceryItemRepository groceryItemRepository;
+    private final GroceryListRepository groceryListRepository;
+    private final GroceryItemRepository groceryItemRepository;
 
     public ReportService(GroceryListRepository groceryListRepository,
                          GroceryItemRepository groceryItemRepository) {
