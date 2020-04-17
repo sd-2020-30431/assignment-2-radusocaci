@@ -9,4 +9,7 @@
     </ul>
   </div>
 </nav>
+<div *ngIf="isAuthenticated() && showNotification" class="container alert alert-danger" role="alert">
+  You are wasting food based on your current goal! Consider donating...
+</div>
 <router-outlet></router-outlet>

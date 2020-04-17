@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class GroceryItemService {
-    private GroceryItemRepository groceryItemRepository;
-    private GroceryListRepository groceryListRepository;
-    private GoalService goalService;
+    private final GroceryItemRepository groceryItemRepository;
+    private final GroceryListRepository groceryListRepository;
+    private final GoalService goalService;
 
-    private ApplicationEventPublisher applicationEventPublisher;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     public GroceryItemService(GroceryItemRepository groceryItemRepository,
                               GroceryListRepository groceryListRepository,
@@ -68,7 +68,7 @@ public class GroceryItemService {
         return groceryItemRepository.findById(id).get();
     }
 
-    private void checkWaste(String name) {
+    public void checkWaste(String name) {
         Date now = Date.from(ZonedDateTime.now().toInstant());
         Goal goal = goalService.getGoalByUsername(name);
 
@@ -87,7 +87,7 @@ public class GroceryItemService {
                 })
                 .reduce(0, Integer::sum);
 
-        String newValue = (goal.getCaloriesPerDay() >= dailyConsumption) ? null : "The goal is too tight! Consider donating...";
+        String newValue = (goal.getCaloriesPerDay() >= dailyConsumption) ? null : "show";
 
         applicationEventPublisher.publishEvent(new NotificationEvent(this, newValue));
     }
