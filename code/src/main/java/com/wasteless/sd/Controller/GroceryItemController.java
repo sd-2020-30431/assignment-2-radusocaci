@@ -5,6 +5,7 @@ import com.wasteless.sd.Service.GroceryItemService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -23,14 +24,13 @@ public class GroceryItemController {
 
     @PostMapping(path = "/grocery-items/{listId}")
     public GroceryListItem createGroceryList(@Valid @RequestBody GroceryListItem groceryItem,
-                                             @PathVariable(value = "listId") Integer listId) {
-//        groceryItemService.save(groceryItem, listId, principal.getName());
-        return groceryItemService.save(groceryItem, listId, "dummy");
+                                             @PathVariable(value = "listId") Integer listId,
+                                             Principal principal) {
+        return groceryItemService.save(groceryItem, listId, principal.getName());
     }
 
     @DeleteMapping("/grocery-items/{id}")
-    public void deleteGroceryList(@PathVariable("id") Integer id) {
-//        groceryItemService.deleteGroceryItem(id, principal.getName());
-        groceryItemService.deleteGroceryItem(id, "dummy");
+    public void deleteGroceryList(@PathVariable("id") Integer id, Principal principal) {
+        groceryItemService.deleteGroceryItem(id, principal.getName());
     }
 }

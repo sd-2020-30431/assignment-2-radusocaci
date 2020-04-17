@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @CrossOrigin("*")
@@ -19,7 +20,7 @@ public class GoalController {
     }
 
     @PostMapping("/goal")
-    public Goal createGoal(@Valid @RequestBody Goal goal) {
-        return goalService.save(goal, "user");
+    public Goal createGoal(@Valid @RequestBody Goal goal, Principal principal) {
+        return goalService.save(goal, principal.getName());
     }
 }

@@ -3,7 +3,7 @@ package com.wasteless.sd.Model;
 import org.springframework.context.ApplicationEvent;
 
 public class NotificationEvent extends ApplicationEvent {
-    private String message;
+    private final String message;
 
     public NotificationEvent(Object source, String message) {
         super(source);

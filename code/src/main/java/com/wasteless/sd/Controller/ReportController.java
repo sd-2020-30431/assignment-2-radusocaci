@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @CrossOrigin("*")
 public class ReportController {
@@ -18,7 +20,7 @@ public class ReportController {
     }
 
     @GetMapping("/report")
-    public ReportDTO getMonthlyReport(@RequestParam("type") String reportType) {
-        return reportService.getReport(ReportType.valueOf(reportType.toUpperCase()), "user");
+    public ReportDTO getMonthlyReport(@RequestParam("type") String reportType, Principal principal) {
+        return reportService.getReport(ReportType.valueOf(reportType.toUpperCase()), principal.getName());
     }
 }

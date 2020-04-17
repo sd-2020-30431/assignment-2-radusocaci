@@ -5,6 +5,7 @@ import com.wasteless.sd.Service.GroceryListService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -17,9 +18,8 @@ public class GroceryListController {
     }
 
     @GetMapping("/grocery-lists")
-    public List<GroceryList> getAllGroceryLists() {
-//        return groceryListService.findAllByUsername(principal.getName());
-        return groceryListService.findAll();
+    public List<GroceryList> getAllGroceryLists(Principal principal) {
+        return groceryListService.findAllByUsername(principal.getName());
     }
 
     @DeleteMapping("/grocery-lists/{id}")

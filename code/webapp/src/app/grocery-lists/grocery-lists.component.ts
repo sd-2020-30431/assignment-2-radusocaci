@@ -21,7 +21,7 @@ export class GroceryListsComponent implements OnInit {
 
   ngOnInit(): void {
     this.groceryService.getGroceryLists().subscribe(list => this.groceryLists = list);
-    this.model = {name: '', username: ''} as GroceryList
+    this.model = {name: '', username: sessionStorage.getItem('username')} as GroceryList
   }
 
   deleteGroceryList(id: number) {

@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 import javax.sql.DataSource;
 
+import static org.springframework.http.HttpMethod.OPTIONS;
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final DataSource dataSource;
@@ -27,10 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .anyRequest().permitAll();
-//                .and().httpBasic()
-//                .and().formLogin().defaultSuccessUrl("/grocery-lists", true)
-//                .loginPage("/auth/login").permitAll()
-//                .and().logout().permitAll();
+                .antMatchers(OPTIONS, "/**").permitAll()
+                .anyRequest().authenticated()
+                .and().httpBasic();
     }
 }
