@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AuthService} from "./auth.service";
 import * as Stomp from "stompjs"
 import * as SockJS from "sockjs-client"
-import {Notification} from "./notification";
+import {NotificationHandler} from "./notification-handler";
 
 @Component({
   selector: 'app-root',
@@ -13,8 +13,8 @@ export class AppComponent {
 
   title = 'WasteLess';
   wsUrl = 'http://localhost:8080/ws'
-  notification: Notification;
   showNotification: boolean = false;
+  notificationHandler: NotificationHandler = new NotificationHandler();
 
   client: any;
 
@@ -38,14 +38,14 @@ export class AppComponent {
     this.client.connect({}, (frame) => {
       _this.client.subscribe('/notification/message', (notification) => {
         if (notification.body) {
-          this.notification = JSON.parse(notification.body);
-          this.notify();
+          this.notificationHandler.notify(JSON.parse(notification.body));
+          this.update();
         }
       })
     })
   }
 
-  private notify() {
-    this.showNotification = this.notification.message === 'show';
+  private update() {
+    this.showNotification = this.notificationHandler.msg === 'show';
   }
 }
